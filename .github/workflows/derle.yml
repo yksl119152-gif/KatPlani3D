@@ -4,6 +4,9 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   derle:
     runs-on: ubuntu-latest
@@ -57,3 +60,13 @@ jobs:
         with:
           name: KatPlani3D-JAR
           path: KatPlani3D/KatPlani3D.jar
+
+      - name: Derlenen dosyalari depoya ekle
+        run: |
+          mkdir -p cikti
+          cp KatPlani3D/KatPlani3D.apk KatPlani3D/KatPlani3D.jar cikti/
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add cikti
+          git commit -m "Derlenen APK ve JAR [skip ci]" || exit 0
+          git push
