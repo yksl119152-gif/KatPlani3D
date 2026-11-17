@@ -43,7 +43,7 @@ jobs:
         working-directory: KatPlani3D/jar
         run: |
           mkdir -p out
-          javac --release 11 -encoding UTF-8 -d out src/KatPlani3D.java
+          javac --release 8 -Xlint:-options -encoding UTF-8 -d out src/KatPlani3D.java
           cp -r web out/
           jar cfe ../KatPlani3D.jar KatPlani3D -C out .
 
